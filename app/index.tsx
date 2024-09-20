@@ -1,16 +1,13 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
-  SafeAreaView,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { View, Text, StyleSheet, ImageBackground } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import CustomButton from "@/components/CustomButton";
 import meditationImages from "@/constants/meditation-images";
+import { useRouter } from "expo-router";
+import AddGradient from "@/components/AddGradient";
 
 export default function HomeScreen() {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -19,25 +16,20 @@ export default function HomeScreen() {
         resizeMode="cover"
         style={{ flex: 1, width: "100%", height: "100%" }}
       >
-        <LinearGradient
-          style={{ flex: 1 }}
-          colors={["rgba(0,0,0,0.4)", "rgba(0,0,0,0.8)"]}
-        >
-          <SafeAreaView style={{ flex: 1, margin: 24 }}>
-            <View style={{ flex: 1, rowGap: 8, paddingTop: 20 }}>
-              <Text style={styles.heroTxt}>Hello React Native</Text>
-              <Text style={styles.heroSubtitle}>
-                Simplifying meditation for everyone
-              </Text>
-            </View>
-            <View>
-              <CustomButton
-                label="Start"
-                onPress={() => console.log("button pressed!")}
-              />
-            </View>
-          </SafeAreaView>
-        </LinearGradient>
+        <AddGradient colors={["rgba(0, 0, 0, 0.4)", "rgba(0, 0, 0, 0.8)"]}>
+          <View style={{ flex: 1, rowGap: 8, paddingTop: 20 }}>
+            <Text style={styles.heroTxt}>Hello React Native</Text>
+            <Text style={styles.heroSubtitle}>
+              Simplifying meditation for everyone
+            </Text>
+          </View>
+          <View>
+            <CustomButton
+              label="Start"
+              onPress={() => router.push("/nature-meditate")}
+            />
+          </View>
+        </AddGradient>
       </ImageBackground>
     </View>
   );

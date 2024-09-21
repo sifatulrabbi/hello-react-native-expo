@@ -3,16 +3,21 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
-  KeyboardAvoidingView,
-  TextInput,
   ScrollView,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { AntDesign, Ionicons, Entypo } from "@expo/vector-icons";
+import { AntDesign, Entypo } from "@expo/vector-icons";
 import { useRouter } from "expo-router/build/hooks";
+import CustomTextarea from "@/components/custom-textarea";
+import { useState } from "react";
 
 export default function ChatbotPage() {
+  const [msg, setMsg] = useState("");
   const router = useRouter();
+
+  async function onSubmit() {
+    console.log(msg);
+  }
 
   return (
     <>
@@ -24,7 +29,7 @@ export default function ChatbotPage() {
             onPress={() => router.back()}
             className="flex-row items-center"
           >
-            <AntDesign name="arrowleft" size={24} color="black" />
+            <AntDesign name="arrowleft" size={24} color="#2563eb" />
             <Text className="text-xl font-bold leading-none ml-4">Chatbot</Text>
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.8} className="pl-4">
@@ -34,25 +39,7 @@ export default function ChatbotPage() {
 
         <ScrollView className="flex-1"></ScrollView>
 
-        <KeyboardAvoidingView className="w-full flex-row items-end bg-white gap-x-2 p-4">
-          <TouchableOpacity
-            activeOpacity={0.8}
-            className="px-3 py-3 rounded-full bg-gray-200"
-          >
-            <AntDesign name="plus" size={20} color="gray" />
-          </TouchableOpacity>
-          <TextInput
-            className="px-4 py-2 text-base font-medium max-h-60 bg-gray-200 rounded-3xl flex-1"
-            placeholder="Type your message here..."
-            multiline
-          />
-          <TouchableOpacity
-            activeOpacity={0.8}
-            className="px-4 py-3 rounded-full bg-blue-500"
-          >
-            <Ionicons name="send" size={20} color="white" />
-          </TouchableOpacity>
-        </KeyboardAvoidingView>
+        <CustomTextarea value={msg} onChangeText={setMsg} onSubmit={onSubmit} />
       </SafeAreaView>
     </>
   );

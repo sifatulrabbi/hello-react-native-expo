@@ -1,38 +1,29 @@
-import { View, Text, ImageBackground } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import CustomButton from "@/components/custom-button";
-import meditationImages from "@/constants/meditation-images";
-import AddGradient from "@/components/add-gradient";
 import { useRouter } from "expo-router";
 
 export default function HomeScreen() {
   const router = useRouter();
 
   return (
-    <View className="flex-1 justify-center items-center">
+    <>
       <StatusBar style="light" />
-      <ImageBackground
-        source={meditationImages.beachImage}
-        resizeMode="cover"
-        className="flex-1 w-full h-full"
-      >
-        <AddGradient>
-          <View className="flex-1 gap-y-2 pt-5">
-            <Text className="text-3xl font-bold text-white text-center w-full">
-              Hello React Native
-            </Text>
-            <Text className="text-white text-center w-full text-lg">
-              Simplifying meditation for everyone
-            </Text>
-          </View>
-          <View>
-            <CustomButton
-              label="Start Chat"
-              onPress={() => router.push("/chatbot")}
-            />
-          </View>
-        </AddGradient>
-      </ImageBackground>
-    </View>
+      <SafeAreaView className="flex-1 justify-center items-center bg-blue-600 pt-8">
+        <View className="w-full flex-1 gap-y-4 p-4 h-full items-center justify-center">
+          <Text className="text-3xl font-bold text-white text-center w-full">
+            Simple ChatApp
+          </Text>
+          <Text className="text-white text-center w-full text-lg">
+            First time building a chat app using React native and Expo
+          </Text>
+          <CustomButton
+            label="Start Chat"
+            onPress={() => router.push("/chatbot")}
+            containerStyles="mt-14"
+          />
+        </View>
+      </SafeAreaView>
+    </>
   );
 }

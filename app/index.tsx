@@ -27,8 +27,8 @@ export default function HomeScreen() {
           </View>
           <View>
             <CustomButton
-              label="Start"
-              onPress={() => router.push("/nature-meditate")}
+              label="Start Chat"
+              onPress={() => router.push("/chatbot")}
             />
           </View>
         </AddGradient>

@@ -1,25 +1,27 @@
-import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import { View, Text, ImageBackground } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import CustomButton from "@/components/CustomButton";
+import CustomButton from "@/components/custom-button";
 import meditationImages from "@/constants/meditation-images";
+import AddGradient from "@/components/add-gradient";
 import { useRouter } from "expo-router";
-import AddGradient from "@/components/AddGradient";
 
 export default function HomeScreen() {
   const router = useRouter();
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 justify-center items-center">
       <StatusBar style="light" />
       <ImageBackground
         source={meditationImages.beachImage}
         resizeMode="cover"
-        style={{ flex: 1, width: "100%", height: "100%" }}
+        className="flex-1 w-full h-full"
       >
-        <AddGradient colors={["rgba(0, 0, 0, 0.4)", "rgba(0, 0, 0, 0.8)"]}>
-          <View style={{ flex: 1, rowGap: 8, paddingTop: 20 }}>
-            <Text style={styles.heroTxt}>Hello React Native</Text>
-            <Text style={styles.heroSubtitle}>
+        <AddGradient>
+          <View className="flex-1 gap-y-2 pt-5">
+            <Text className="text-3xl font-bold text-white text-center w-full">
+              Hello React Native
+            </Text>
+            <Text className="text-white text-center w-full text-lg">
               Simplifying meditation for everyone
             </Text>
           </View>
@@ -34,23 +36,3 @@ export default function HomeScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  heroTxt: {
-    color: "white",
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 2 * 16,
-  },
-  heroSubtitle: {
-    color: "white",
-    textAlign: "center",
-    fontWeight: "medium",
-    fontSize: 20,
-  },
-});

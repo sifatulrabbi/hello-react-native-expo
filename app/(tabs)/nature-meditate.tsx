@@ -1,11 +1,13 @@
-import AddGradient from "@/components/AddGradient";
+import { StatusBar } from "expo-status-bar";
+import AddGradient from "@/components/add-gradient";
 import { View, Text } from "react-native";
 
 export default function NatureMediate() {
   return (
-    <AddGradient colors={["rgba(0, 0, 0, 0.4)", "rgba(0, 0, 0, 0.8)"]}>
+    <AddGradient colors={["#161b2e", "#0a4d4a", "#766e67"]}>
+      <StatusBar style="light" />
       <View>
-        <Text>NatureMediate</Text>
+        <Text>Welcome</Text>
       </View>
     </AddGradient>
   );

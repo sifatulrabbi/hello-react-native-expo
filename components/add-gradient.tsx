@@ -3,14 +3,14 @@ import { LinearGradient } from "expo-linear-gradient";
 
 export default function AddGradient({
   children,
-  colors,
+  colors = ["rgba(0, 0, 0, 0.4)", "rgba(0, 0, 0, 0.8)"],
 }: {
   children: any;
-  colors: string[];
+  colors?: string[];
 }) {
   return (
-    <LinearGradient style={{ flex: 1 }} colors={colors}>
-      <SafeAreaView style={{ flex: 1, margin: 24 }}>{children}</SafeAreaView>
+    <LinearGradient className="flex-1" colors={colors}>
+      <SafeAreaView className="flex-1 m-5">{children}</SafeAreaView>
     </LinearGradient>
   );
 }

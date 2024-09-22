@@ -8,7 +8,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { AntDesign, Entypo, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import CustomTextarea from "@/components/custom-textarea";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "expo-router/build/hooks";
 import { useChatbot } from "@/contexts/chatbot-context";
 import { USER_TYPE } from "@/constants/user-types";
@@ -19,6 +19,7 @@ export default function ChatbotPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { messages, fetchChatMessages, postMessage } = useChatbot();
+  const scrollViewRef = useRef<ScrollView>(null);
 
   useEffect(() => {
     setLoading(true);
@@ -29,12 +30,21 @@ export default function ChatbotPage() {
     });
   }, []);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => scrollToBottom(), 500);
+    return () => clearTimeout(timeout);
+  }, [messages.length]);
+
   async function onSubmit(msg: string) {
+    scrollToBottom();
     setLoading(true);
     await postMessage(msg);
     setLoading(false);
   }
 
+  function scrollToBottom() {
+    scrollViewRef.current?.scrollToEnd({ animated: true });
+  }
   return (
     <>
       <StatusBar style="dark" />
@@ -54,7 +64,10 @@ export default function ChatbotPage() {
         </View>
 
         {!gettingMessages && (
-          <ScrollView className="flex-1 px-4 flex-col gap-y-4 w-full">
+          <ScrollView
+            ref={scrollViewRef}
+            className="flex-1 px-4 flex-col gap-y-4 w-full"
+          >
             {messages.map((msg) => (
               <View
                 key={msg.id + msg.thread_id + msg.actor_id + msg.timestamp}

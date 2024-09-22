@@ -35,6 +35,7 @@ export default function CustomTextarea({
         placeholder={placeholder}
         multiline
         editable={!disabled}
+        maxLength={4096}
       />
       <PrimaryGradient containerStyles="rounded-full">
         <TouchableOpacity

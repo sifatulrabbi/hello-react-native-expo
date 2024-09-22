@@ -10,13 +10,17 @@ import { AntDesign, Entypo } from "@expo/vector-icons";
 import { useRouter } from "expo-router/build/hooks";
 import CustomTextarea from "@/components/custom-textarea";
 import { useState } from "react";
+import { useChatbot } from "@/contexts/chatbot-context";
 
 export default function ChatbotPage() {
-  const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { message, setMessage, postMessage } = useChatbot();
 
   async function onSubmit() {
-    console.log(msg);
+    setLoading(true);
+    await postMessage();
+    setLoading(false);
   }
 
   return (
@@ -39,7 +43,12 @@ export default function ChatbotPage() {
 
         <ScrollView className="flex-1"></ScrollView>
 
-        <CustomTextarea value={msg} onChangeText={setMsg} onSubmit={onSubmit} />
+        <CustomTextarea
+          value={message}
+          onChangeText={setMessage}
+          onSubmit={onSubmit}
+          disabled={loading}
+        />
       </SafeAreaView>
     </>
   );
